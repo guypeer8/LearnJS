@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<title>טיולים מומלצים | ישראל</title>
+<link rel="stylesheet" type="text/css" href="/tiuli.css" />
+</head>
+<body>
+<h1>טיולים מומלצים</h1>
+<div id="trips">
+	<% trips.forEach(function(trip) { %>
+		<div class="trip">
+				<a href="<%= trip.link %>" target="_blank"><%= trip.title %></a>
+				<div><%= trip.summary %></div>
+				<div>
+					<img src="<%= trip.image %>" title="<%= trip.title %>" />
+				</div>
+				<div>
+					<span>אזור: <%= trip.area %>, </span>
+					<span>דירוג: <%= trip.stars %>, </span>
+					<span>רמת קושי: <%= trip.difficulty %>, </span>
+					<span>קילומטרים: <%= trip.killometers %></span>
+				</div>
+				<div>
+					<span>עונות: <%= trip.seasons %></span>
+				</div>
+				<% trip.details.forEach(function(detail,i) { %>
+					<% if(i != trip.details.length-1) { %>
+						<span><%= detail %>, </span>
+					<% } else { %>
+						<span><%= detail %>
+					<% } %>	
+				<% }) %>
+		</div>
+	<% }) %>
+</div>
+</body>
+</html>

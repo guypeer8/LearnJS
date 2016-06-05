@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h4>בחר קטגוריה:</h4>
+    <form name="category-form" method="POST" action="/">
+        <select name="category">
+            {% for option in options %}
+                <option value="{{ option.id }}">{{ option.text }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">לך על זה!</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<title>Todo- KnockoutJS</title>
+<style>
+div {margin-bottom: 30px;}
+.italic {font-style: italic;}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div>
+			<input type="text" placeholder="Todo..." data-bind="textInput:newTodo, event:{keyup:addTodo}" />
+		</div>
+		<div data-bind="template: {name:'visibility-filters-template', foreach:visibilityFilters}"></div>
+		<div>
+			Todos Left: <span data-bind="text:todosLeft"></span>
+		</div>
+		<todo-list params="todos:todos,visibility:visibility"></todo-list>
+		<div>
+			<button data-bind="click:clearCompleted">Clear Completed</button>
+		</div>
+	</div>
+</body>
+
+<!-- visibility-filters-template -->
+<template id="visibility-filters-template">
+	<span data-bind="text:$data.capitalize(), click:() => $parent.visibility($data), css:{'italic': $parent.visibility() === $data}"></span>
+</template>
+<!-- /visibility-filters-template -->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</html>

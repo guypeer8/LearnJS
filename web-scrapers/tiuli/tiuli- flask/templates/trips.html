@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% for trip in trips %}
+		<div class="trip">
+				<a href="{{ trip['link'] }}" target="_blank">{{ trip['title'] }}</a>
+				<div>{{ trip['summary'] }}</div>
+				<div>
+					<img src="{{ trip['image'] }}" title="{{ trip['title'] }}" />
+				</div>
+				<div>
+					<span>אזור: {{ trip['area'] }}, </span>
+					<span>דירוג: {{ trip['stars'] }}, </span>
+					<span>רמת קושי: {{ trip['difficulty'] }}, </span>
+					<span>קילומטרים: {{ trip['killometers'] }}</span>
+				</div>
+				<div>
+					<span>עונות: {{ trip['seasons'] }}</span>
+				</div>
+				{% for i in range(trip['details']|length) %}
+					{% if i < trip['details']|length-1 %}
+						<span>{{ trip['details'][i] }}, </span>
+					{% else %}
+						<span>{{ trip['details'][i] }}</span>
+					{% endif %}
+				{% endfor %}
+		</div>
+	{% endfor %}	
+{% endblock %}

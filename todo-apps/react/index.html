@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+<title>Todo- ReactJs</title>
+<style>
+div {margin-bottom: 30px;}
+.italic {font-style: italic;}
+</style>
+</head>
+<body>
+	<div id="container"></div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script type="text/babel">
+const TodoInput = React.createClass({
+	getInitialState() {
+		return { value : '' };
+	},
+	onChange(e) {
+		this.setState({ value : e.target.value });
+	},
+	onKeyUp(e) {
+		let val = this.state.value;
+		if(!val || !val.trim())
+			return;
+		if(e.keyCode === 13) {
+			this.setState({ value : '' });
+		  	this.props.addTodo(val);
+		}
+	},
+	render() {
+		return (
+		  <div>
+		  	<input 
+		  	  type="text"
+		      placeholder="Todo..."
+		      onKeyUp={this.onKeyUp} 
+		      onChange={this.onChange} 
+		      value={this.state.value} 
+		    />
+		  </div>
+		);
+	}
+});
+
+const TodoItem = React.createClass({
+	componentWillReceiveProps() {
+		this.setState({ checked : this.props.checked });
+	},
+	isVisible(isChecked, filter) {
+		return filter === 'all' ? true : (filter === 'active' ? !isChecked : isChecked);
+	},
+	render() {
+		let index = Number(this.props.index);
+		let filter = this.props.filter;
+		return (
+			<div style={{ display: this.isVisible(this.props.checked,filter) ? 'block' : 'none' }}>
+			  	<input type="checkbox" checked={this.props.checked} onChange={() => this.props.checkedChanged(index)} />
+			    <span>{this.props.text}</span>
+			    <button onClick={() => this.props.removeTodo(index)}>X</button>
+			</div>
+		);
+	}
+});
+
+const TodoList = React.createClass({
+	render() {
+	  	return (
+	    	<div>
+		      	{this.props.todos.map((todo,index) => {
+	          		return <TodoItem 
+	          				 key={index} 
+	          				 index={index} 
+	          				 text={todo.text}
+	          				 checked={todo.checked}
+	          				 removeTodo={this.props.removeTodo} 
+	          				 checkedChanged = {this.props.checkedChanged}
+	          				 filter={this.props.filter} 
+	          			   />
+	          	})}
+	        </div>
+	    );
+	  }
+});
+
+const TodoFilters = React.createClass({
+	capitalize(str) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	},
+	render() {
+		const filters = ['all', 'active', 'completed'];
+		let fltr = this.props.filter;
+		return (
+		  <div>
+		    {filters.map((filter,index) => {
+		        return  <span key={'filter_' + index}
+		        		  onClick={() => this.props.setFilter(filter)}
+		        		  className={filter === fltr ? 'italic' : ''} 
+		        		  style={{ marginRight:'10px' }}
+		        		>
+		                   {this.capitalize(filter)}
+		                </span>
+		      })}
+		  </div>
+		);
+	}
+});
+
+const TodosLeft = React.createClass({
+	render() {
+		return (
+			<div>
+				Todos Left: 
+				<span>{this.props.todosLeft}</span>
+			</div>
+		);
+	}
+});
+
+const ClearCompleted = React.createClass({
+	render() {
+		return (
+		  <div>
+		    <button onClick={this.props.clearCompleted}>
+		    	Clear Completed
+		    </button>
+		  </div>
+		);
+	}
+});
+
+const App = React.createClass({
+	getInitialState() {
+		return {
+		  todos: [],
+		  filter: 'all'
+		};
+	},
+	addTodo(text) {
+		this.setState({
+			todos : this.state.todos.concat([{text:text, checked:false}])
+		});
+	},
+	removeTodo(index) {
+		let updatedTodos = this.state.todos;
+		updatedTodos.splice(index,1);
+		this.setState({ todos : updatedTodos });
+	},
+	setFilter(filter) {
+		this.setState({ filter });
+	},
+	clearCompleted() {
+		this.setState({ todos : this.getActiveTodos() });
+	},
+	getActiveTodos() {
+		return this.state.todos.filter(todo => !todo.checked);
+	},
+	checkedChanged(index) {
+		let updatedTodos = this.state.todos;
+		updatedTodos[index].checked = !updatedTodos[index].checked;
+		this.setState({ todos : updatedTodos });
+	},
+	render() {
+		return (
+			<div>
+				<TodoInput addTodo={this.addTodo} />
+				<TodoFilters setFilter={this.setFilter} filter={this.state.filter} />
+				<TodosLeft todosLeft={this.getActiveTodos().length} />
+				<TodoList 
+					todos={this.state.todos} 
+					filter={this.state.filter}
+					removeTodo={this.removeTodo} 
+					checkedChanged={this.checkedChanged} 
+				/>
+				<ClearCompleted clearCompleted={this.clearCompleted} />
+			</div>
+		);
+	}
+});
+
+ReactDOM.render(<App />, document.getElementById('container'));
+</script>
+</html>

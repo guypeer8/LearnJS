@@ -1,0 +1,56 @@
+body {
+	padding: 30px;
+}
+.float-left {
+	float: left;
+}
+.float-right {
+	float: right;
+}
+.clear {
+	clear: both;
+}
+#movie-query {
+	background: rgb(40,42,56);
+    outline: none;
+    padding: 10px 0 10px 20px;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 16px;
+}
+#json-container {
+	margin: 25px 0;
+}
+.movie-panel-wrapper {
+	position: relative;
+	width: 550px;
+	border: 1px solid black;
+	border-radius: 5px;
+	float: left;
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-bottom: 50px;
+	padding: 15px;
+	font-family: monospace;
+	position: relative;
+}
+.movie-panel .movie-title {
+	padding: 8px 0;
+	font-size: 16px;
+}
+.movie-panel .movie-poster img {
+	max-width: 350px;
+}
+.movie-panel .movie-plot {
+	padding: 15px 0;
+	font-size: 15px;
+}
+.movie-panel-wrapper .movie-footer {
+	font-size: 16px;
+    position: absolute;
+    bottom: 15px;
+    left: 17px;
+    right: 20px;	
+}

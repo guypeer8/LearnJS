@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="Todo-Angular">
+<head>
+<title>Todo- AngularJS</title>
+<style>
+div {margin-bottom: 30px;}
+.italic {font-style: italic;}
+</style>
+</head>
+<body>
+	<div id="container" ng-controller="todoController">
+		<div>
+			<input type="text" placeholder="Todo..." ng--model="newTodo" ng-keyup="addTodo($event)" />
+		</div>
+		<div>
+			<span ng-repeat="filter in visibilityFilters" ng-click="setVisibility(filter)" ng-class="{'italic': visibility === filter}">
+				{{ filter | capitalize }}
+			</span>
+		</div>
+		<div>
+			Todos Left: {{ todosLeft() }}
+		</div>
+		<div ng-repeat="todo in todos" ng-if="shouldShow($index)">
+			<input type="checkbox" ng-model="todo.checked" />
+			<span>{{ todo.text }}</span>
+			<button ng-click="removeTodo($index)">X</button>
+		</div>
+		<div>
+			<button ng-click="clearCompleted()">Clear Completed</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</html>

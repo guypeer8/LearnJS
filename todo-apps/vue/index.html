@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<title>Todo- VueJS</title>
+<style>
+div {margin-bottom: 30px;}
+.italic {font-style: italic;}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div>
+			<input type="text" placeholder="Todo..." v-model="newTodo" @keyup.enter="addTodo" />
+		</div>
+		<div>
+			<span v-for="filter in visibilityfilters" @click="visibility = filter" v-bind:class="{'italic': visibility === filter}">
+				{{ filter | capitalize }}
+			</span>
+		</div>
+		<div>
+			Todos Left: {{ todosLeft }}
+		</div>
+		<div v-for="todo in filteredTodos">
+			<input type="checkbox" v-model="todo.checked" />
+			<span>{{ todo.text }}</span>
+			<button @click="removeTodo(todo)">X</button>
+		</div>
+		<div>
+			<button @click="clearCompleted">Clear Completed</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</html>

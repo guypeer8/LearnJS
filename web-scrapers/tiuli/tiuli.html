@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<title>טיולים מומלצים | ישראל</title>
+<link rel="stylesheet" type="text/css" href="/tiuli.css" />
+</head>
+<body>
+<h1>טיולים מומלצים</h1>
+<div id="trips"></div>
+</body>
+<script type="text/javascript">
+var container = document.getElementById('trips');
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = () => {
+	var str = '';
+	if(xhr.status === 200 && xhr.readyState === 4) {
+		var trips = JSON.parse(xhr.responseText).sort((a,b) => b.stars-a.stars);
+		trips.forEach(trip => {
+			str += [
+				'<div class="trip">',
+ 					'<a href="' + trip.link + '" target="_blank">' + trip.title + '</a>',
+ 					'<div>' + trip.summary + '</div>',
+ 					'<div>',
+ 						'<img src="' + trip.image + '" title="' + trip.title + '"/>',
+ 					'</div>',
+ 					'<div>',
+ 						'<span>אזור: ' + trip.area + ', </span>',
+ 						'<span>דירוג: ' + trip.stars + ', </span>',
+ 						'<span>רמת קושי: ' + trip.difficulty + ', </span>',
+ 						'<span>קילומטרים: ' + trip.killometers + '</span>',
+ 					'</div>',
+ 					'<div>',
+ 						'<span>עונות: ' + trip.seasons + '</span>',
+ 					'</div>',
+ 					generateDetails(trip.details),
+				'</div>'
+			].join('');
+		});
+		container.innerHTML = str;
+	}
+}
+xhr.open('GET','/jsons/high_rated.json', true);
+xhr.send(null);
+
+function generateDetails(details) {
+	var str = 'פרטים נוספים: ';
+	details.forEach(d => str += d + ', ');
+	return str.trim().substring(0,str.length-2);
+}
+</script>
+</html>

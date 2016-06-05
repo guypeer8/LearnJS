@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="category-name">
+        <span>{{ category|capitalize }}</span>
+    </div>
+    {% for d in data %}
+        <a href="{{ d.url }}" target="_blank">
+            <div class="article">
+                <div class="title">
+                    {{ d.title }}
+                </div>
+                <div class="sub-title">
+                    {{ d.sub_title }}
+                </div>
+                <div class="image">
+                    <img src="{{ d.image }}" title="{{ d.title }}" />
+                </div>
+                <ul class="footer">
+                    <li>פורסם: {{ d.time }}</li>
+                    <li>מס' תגובות: {{ d.comments }}</li>
+                </ul>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}

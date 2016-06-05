@@ -1,0 +1,73 @@
+.container {
+	width: 700px;
+	border:1px solid black;
+	margin:auto;
+	font-family: cursive, sans-serif;
+	background: url('https://s.yimg.com/os/mit/media/m/weather/images/fallbacks/lead/cloudy_d-e618500.jpg');
+}
+.container form[name="weather"] {
+	margin-top:25px;
+	text-align: center;
+	font-weight: 700;
+}
+.container form[name="weather"] .label {
+	display: block;
+	margin-bottom: 40px;
+	font-size: 24px;
+}
+.container form[name="weather"] input {
+	width: 330px;
+	height: 40px;
+	outline:none;
+	border:1px solid #ccc;
+	text-align: center;
+	font-family: cursive, sans-serif;
+	font-size: 20px;
+}
+.container form[name="weather"] input:focus {
+	background-color: #eee;
+}
+.container form[name="weather"] button {
+	min-width:200px;
+	height: 40px;
+	line-height: 0;
+	padding: 15px;
+	border:none;
+	background-color: #ccc;
+	color: black;
+	cursor:pointer;
+	font-family: cursive, sans-serif;
+	font-size: 16px;
+	box-shadow: 0 0 5px black;
+}
+.container form[name="weather"] button:hover {
+	opacity: 0.8;
+}
+.container #weather {
+	margin-top: 25px;
+	padding: 15px 0 30px 20px;
+	text-align: center;
+}
+.container #weather .headline {
+	font-size: 24px;
+	text-decoration: underline;
+}
+.container #weather .panel {
+	border:1px solid black;
+	float: left;
+	border-radius: 5px;
+	width: 320px;
+	margin-right: 18px;
+	margin-top: 15px;
+	background-color: #D0D5D5;
+	opacity: 0.92;
+}
+.container #weather .panel p {
+	padding: 10px;
+}
+.container #weather .panel p:first-child {
+	border-bottom:1px solid black;
+	background-color: #0B4AD7;
+	color: white;
+	margin-top: 0;
+}

@@ -1,0 +1,38 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Forecast</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/weather.css" />
+</head>
+<body>
+
+<div class="container">
+	<form name="weather">
+		<label class="label" for="enter-city">Enter country/city:</label>
+		<input type="text" id="enter-city" /><br><br><br>
+		<button type="submit">Get Weather Forecast</button>
+	</form>
+	<div id="weather"></div>
+</div>
+
+</body>
+
+<script id="weather-template" type="text/x-handlebars-template">
+	<p class='headline'>{{city}}- Weather Forecast</p>
+	{{#each list}}
+		<div class='panel'>
+			<p>Date: {{dt_txt}}</p>
+			{{#each weather}}
+				<p>{{main}} , {{description}}</p>
+			{{/each}}	
+		</div>
+	{{/each}}
+	<div style='clear:both'></div>
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script type="text/javascript" src="js/weather.js"></script>
+</html>
