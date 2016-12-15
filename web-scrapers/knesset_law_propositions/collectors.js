@@ -1,12 +1,10 @@
-
-
 const request = require('request');
 const cheerio = require('cheerio');
-const writeFile = require('../utils/utils.js').writeFile;
-const crawlLawInitiators = require('./law_initiators.js').crawlLawInitiators;
+const { writeFile } = require('../utils/utils.js');
+const { crawlLawInitiators } = require('./law_initiators.js');
 
 const URL = 'https://oknesset.org/bill/';
-var posts = [];
+let posts = [];
 
 module.exports = {
 
@@ -60,10 +58,10 @@ function smartIteretor(page, boundry) {
 /* 2- crawl law propositions in page */
 function crawlKnessetLawPropositions($,posts) {
 	$('.card.card-list li').each(function(index,el) {
-		var data = {};
+		const data = {};
 		data['type'] = $(this).find('.item-action').text();
 		data['when'] = $(this).find('.item-context').text();
-		var $anchor = $(this).find('.item-title a');
+		const $anchor = $(this).find('.item-title a');
 		data['link'] = URL + $anchor.attr('href').replace(/\/bill\//,'');
 		data['title'] = $anchor.text();
 		posts.push(data);

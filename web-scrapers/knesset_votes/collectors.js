@@ -1,11 +1,11 @@
 const request = require('request');
 const cheerio = require('cheerio');
-const writeFile = require('../utils/utils.js').writeFile;
+const { writeFile } = require('../utils/utils.js');
 
 const URL = 'https://oknesset.org/vote/';
+const FAILS_BOUNDRY = 50; // when to abort scanning
+let number_of_fails = 0; // count number of errors while scanning
 let posts = [];
-;et number_of_fails = 0; // count number of errors while scanning
-;et FAILS_BOUNDRY = 50; // when to abort scanning
 
 module.exports = {
 

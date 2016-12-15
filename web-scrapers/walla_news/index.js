@@ -1,29 +1,27 @@
-
-
 const request = require('request');
 const cheerio = require('cheerio');
-const writeFile = require('../utils/utils.js').writeFile;
+const { writeFile } = require('../utils/utils.js');
 
 
-request.get('http://www.walla.co.il/', function(err,rsp,body) {
+request.get('http://www.walla.co.il/', (err,rsp,body) => {
 	if(err || !body)
 		return console.log('error');
-	let $ = cheerio.load(body);
-	let posts = [];
+	const $ = cheerio.load(body);
+	const posts = [];
 	$('.article').each(function(index,el) {
-		var data = {};
+		const data = {};
 		$children = $(this).children();
-		var $anchor = $children.first();
-		var href = $anchor.attr('href');
+		const $anchor = $children.first();
+		const href = $anchor.attr('href');
 		if(href) {
 			data['url'] = href;
 		}
-		var $title = $anchor.find('.title');
+		const $title = $anchor.find('.title');
 		if($title) {
 			data['title'] = $title.text();
 		}
-		var $figure = $anchor.find('.figure');
-		var $pre_title = $anchor.find('.pre-title');
+		const $figure = $anchor.find('.figure');
+		const $pre_title = $anchor.find('.pre-title');
 		if($figure.length !== 0) {
 			data['image'] = $figure.find('img').attr('src');
 		}

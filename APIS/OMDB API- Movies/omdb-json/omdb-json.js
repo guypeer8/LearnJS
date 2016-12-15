@@ -83,9 +83,9 @@ function _setLargestHeight() {
 // Sequence of actions
 function _sequence(rsp) {
 	json_container.innerHTML = _buildJson(rsp);
-	buildLink(rsp);
-	appendMovie(rsp);
-	setLargestHeight();
+	_buildLink(rsp);
+	_appendMovie(rsp);
+	_setLargestHeight();
 }
 
 // Makes ajax calls on search query change

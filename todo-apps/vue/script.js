@@ -1,4 +1,4 @@
-(function() {
+{
 
 // Todo Class
 class Todo {
@@ -38,8 +38,9 @@ const Todos = new Vue({
 	methods: {
 		addTodo() {
 			let txt = this.newTodo;
-			if(!txt || !txt.trim())
+			if(!txt || !txt.trim()) {
 				return;
+			}
 			this.todos.push(new Todo(txt));
 			this.newTodo = '';
 		},
@@ -52,4 +53,4 @@ const Todos = new Vue({
 	}
 });
 
-})();
+}

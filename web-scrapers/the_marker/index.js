@@ -1,7 +1,21 @@
 const TheMarker = require('./crawlers.js');
-let category = process.argv[2];
+const category = process.argv[2];
 
-TheMarker.scrape(category || 'main'); // main, news, tech, cars, business, realestate, finance, markets
+if(category === 'all') {
+	[
+		'main', 
+		'news', 
+		'tech', 
+		'cars', 
+		'business', 
+		'realestate', 
+		'finance', 
+		'markets'
+	].forEach(category => TheMarker.scrape(category));
+}
+else {
+	TheMarker.scrape(category || 'main');
+}
 
 /**
 	Usage: run this file. call "TheMarker.scrape('news')"" if you want to scrap the news page. you have other options commented above.

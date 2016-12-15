@@ -1,8 +1,8 @@
 const request = require('request');
 const cheerio = require('cheerio');
 const urls = require('./urls.js');
-const BASE_URL = urls.BASE_URL;
-const writeFile = require('../utils/utils.js').writeFile;
+const { writeFile } = require('../utils/utils.js');
+const { BASE_URL } = urls;
 
 module.exports = {
 	scrape(what) {
